@@ -6,6 +6,17 @@ const styles = StyleSheet.create({
         padding: 40,
         backgroundColor: '#32364D'
     },
+    backButtom: {
+        padding: 3,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: 'center',
+        marginTop: 30,
+        backgroundColor: '#5971FF',
+        width: 40,
+        height: 40,
+        borderRadius: 50
+    },
     title: {
         fontSize: 38,
         marginTop: 20,
@@ -24,7 +35,9 @@ const styles = StyleSheet.create({
     },
     label: {
         color: '#ffff',
-        marginTop: 6
+        marginTop: 6,
+        marginBottom: 4,
+        fontWeight: 'bold'
     },
     inputText: {
         width: '100%',
@@ -41,7 +54,8 @@ const styles = StyleSheet.create({
         width: '40%',
         height: 60,
         borderRadius: 15,
-        marginVertical: 10
+        marginVertical: 10,
+
     },
     containerLinks: {
         display: "flex",
@@ -75,8 +89,11 @@ const styles = StyleSheet.create({
     },
     elementBL: {
         display: "flex",
+        shadowColor: "#5971FF",
+        shadowOpacity: 100,
+        shadowRadius: 40,
         alignSelf: "flex-start",
-        marginTop: Dimensions.get('screen').height - 160,
+        marginTop: Dimensions.get('screen').height - 124,
         justifyContent: "center",
         alignItems: "center",
         position: "absolute",

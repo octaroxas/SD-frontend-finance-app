@@ -1,8 +1,15 @@
 import { useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, TextInput, Dimensions } from 'react-native';
+import {
+    Text,
+    View,
+    SafeAreaView,
+    TouchableOpacity,
+    TextInput
+} from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
 import { LinearGradient } from 'expo-linear-gradient'
 import styles from './styles/styles';
+import { useForm } from 'react-hook-form';
 
 const HeaderSignUp = () => {
     return (
@@ -20,6 +27,8 @@ const HeaderSignUp = () => {
 
 const SignUp = () => {
 
+    const { register, handleSubmit } = useForm()
+
     useEffect(() => {
 
     }, []);
@@ -28,6 +37,7 @@ const SignUp = () => {
         <SafeAreaView style={styles.container}>
             <TouchableOpacity>
                 <Feather
+                    style={styles.backButtom}
                     name="chevron-left"
                     color="white"
                     size={30}
@@ -37,7 +47,6 @@ const SignUp = () => {
 
             <View style={styles.formContainer}>
                 <Text style={styles.label}>
-
                     Nome
                 </Text>
                 <TextInput
@@ -69,15 +78,16 @@ const SignUp = () => {
                     style={styles.inputText}
                 />
 
-                <LinearGradient
-                    colors={['#8355E5', '#5971FF']}
-                    style={styles.buttom}
-                >
-                    <Text style={{ color: 'white' }}>
-                        Cadastrar usuário
-                    </Text>
-                </LinearGradient>
-
+                <TouchableOpacity>
+                    <LinearGradient
+                        colors={['#8355E5', '#5971FF']}
+                        style={styles.buttom}
+                    >
+                        <Text style={{ color: 'white' }}>
+                            Cadastrar usuário
+                        </Text>
+                    </LinearGradient>
+                </TouchableOpacity>
             </View>
 
             <View style={styles.containerLinks}>
