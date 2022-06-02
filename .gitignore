@@ -4,7 +4,8 @@
 # OSX
 #
 .DS_Store
-
+.expo
+packager-info.json
 # Xcode
 #
 build/
