@@ -1,8 +1,30 @@
 # Finance App - Sistemas Distribuídos
-> Repositório dedicado para a implementação do frontend para o projeto "Finance App", desenvolvido durante a disciplina de Sistemas Distribuídos e como uma das partes do projeto final, conjuntamente ao backend localizado <a href="https://github.com/octaroxas/api-finance-app">neste repositório</a>.
+> Repositório dedicado para a implementação do front-end para o projeto "Finance App", desenvolvido durante a disciplina de Sistemas Distribuídos como projeto final, conjuntamente ao back-end localizado <a href="https://github.com/octaroxas/api-finance-app">neste repositório</a>.
 
 ---
-## • How To
+## • Histórico de alterações (entregas da disciplina)
+### 1. Primeira entrega - Junho 01, 2022
+- Criação do projeto front-end com o React Native e NodeJS;
+- Criação de telas:
+  - Login;
+  - Cadastro.
+- Montagem da API com documentação (back-end), disponível no repositório dedicado acessível <a href="https://github.com/octaroxas/api-finance-app">clicando aqui</a>.
+  - CRUD;
+    - <a href="https://github.com/octaroxas/api-finance-app/blob/main/docs/api/Auth.md">Autenticação;</a>
+    - <a href="https://github.com/octaroxas/api-finance-app/blob/main/docs/api/Wallet.md">Carteiras/Wallet</a>;
+    - <a href="https://github.com/octaroxas/api-finance-app/blob/main/docs/api/Transaction.md">Transações/Transaction</a>.
+  - Rotas da API;
+> Nesta entrega, foram priorizadas a criação das primeiras telas conforme o projeto disponível no Figma, podendo ser acessado <a href="https://www.figma.com/file/YTsOFf1ZLPYqk3Z0HmocaN/Finance-App?node-id=0%3A1">nesta URL.</a> As integrações entre o back-end e o front-end serão efetivadas nas próximas entregas.
+
+### 2. Segunda entrega - Junho 15, 2022
+- Em breve.
+
+### 3. Terceira entrega - Junho 22, 2022
+- Em breve.
+
+---
+
+## • How To (Front-end)
 
 ### 1. Requisitos para execução local do projeto
 - <a href="https://nodejs.org/en/">Node.JS (versão de longo tempo de suporte - LTS)</a>
@@ -78,12 +100,15 @@ Logs for your project will appear below. Press Ctrl+C to exit.
 
 Após isso, deve-se apenas escanear o QR-Code gerado no terminal com o smartphone ou, caso esteja utilizando o emulador Android, copiar o endereço de acesso identificado com o padrão ```exp://endereço_ip:porta``` e utilizá-lo dentro do Expo Go.
 
+> Caso esteja utilizando o MacOS, recomenda-se o uso do <a href="https://github.com/nvm-sh/nvm">Node Version Manager (nvm)</a> para instalação do Node LTS e dependências - yarn, expo-cli - de forma global no sistema.
+
 ---
 
-## Desenvolvedores (Frontend)
+## Desenvolvedores
 <table style="border: 1px solid gray;">
   <tr>
-    <td align="center"><a href="https://github.com/NepZR"><img style="width: 150px; height: 150; border-radius: 100%;" src="https://avatars.githubusercontent.com/u/37887926" width="100px;" alt=""/><br /><sub><b>Lucas Darlindo Freitas Rodrigues</b></sub></a><br /><sub><b>Graduando em Ciência da Computação</sub></a><br /><a href="https://www.linkedin.com/in/lucasdfr"><sub><b>LinkedIn</b></sub></a></td>
-    <td align="center"><a href="https://github.com/octaroxas"><img style="width: 150px; height: 150; border-radius: 100%;" src="https://avatars.githubusercontent.com/u/46870808" width="100px;" alt=""/><br /><sub><b>Octacílio Carvalho de Almeida</b></sub></a><br /><sub><b>Graduando em Ciência da Computação</sub></a><br /><a href="https://www.linkedin.com/in/octacilio-c-almeida/"><sub><b>LinkedIn</b></sub></a></td>
+    <td align="center"><a href="https://github.com/NepZR"><img style="width: 150px; height: 150; border-radius: 100%;" src="https://avatars.githubusercontent.com/u/37887926" width="100px;" alt=""/><br /><sub><b>Lucas Darlindo Freitas Rodrigues</b></sub></a><br /><sub><b>Graduando em Ciência da Computação</sub></a><br /><sub><b>Front-end Dev.</sub></a><br /><a href="https://www.linkedin.com/in/lucasdfr"><sub><b>LinkedIn</b></sub></a></td>
+    <td align="center"><a href="https://github.com/octaroxas"><img style="width: 150px; height: 150; border-radius: 100%;" src="https://avatars.githubusercontent.com/u/46870808" width="100px;" alt=""/><br /><sub><b>Octacílio Carvalho de Almeida</b></sub></a><br /><sub><b>Graduando em Ciência da Computação</sub></a><br /><sub><b>Front-end Dev.</sub></a><br /><a href="https://www.linkedin.com/in/octacilio-c-almeida/"><sub><b>LinkedIn</b></sub></a></td>
+    <td align="center"><a href="https://github.com/ianbrito"><img style="width: 150px; height: 150; border-radius: 100%;" src="https://avatars.githubusercontent.com/u/20650133" width="100px;" alt=""/><br /><sub><b>Ian Brito Azevedo</b></sub></a><br /><sub><b>Graduando em Ciência da Computação</sub></a><br /><sub><b>Back-end Dev.</sub></a><br /><a href="https://www.linkedin.com/in/ianbazevedo/"><sub><b>LinkedIn</b></sub></a></td>
   </tr>
 <table>
