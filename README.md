@@ -16,7 +16,7 @@
   - Rotas da API;
 > Nesta entrega, foram priorizadas a criação das primeiras telas conforme o projeto disponível no Figma, podendo ser acessado <a href="https://www.figma.com/file/YTsOFf1ZLPYqk3Z0HmocaN/Finance-App?node-id=0%3A1">nesta URL.</a> As integrações entre o back-end e o front-end serão efetivadas nas próximas entregas.
 
-### 2. Segunda entrega - Junho 15, 2022
+### 2. Segunda entrega - Junho 08, 2022
 - Em breve.
 
 ### 3. Terceira entrega - Junho 22, 2022
