@@ -10,6 +10,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/nunito": "^0.2.2",
     "@hookform/resolvers": "^2.8.10",
     "@types/axios": "^0.14.0",
     "axios": "^0.27.2",
