@@ -191,13 +191,13 @@ const SignUp = () => {
                     }
                 />
                 <View style={styles.messagesContainer}>
-                    {errors.name && <Text style={styles.errorMessage}><Feather style={styles.iconMessage} name='x-circle' /> {errors.name?.message}</Text>}
+                    {errors.name && <Text style={styles.errorMessage}><Feather style={styles.iconMessage} name='x-circle' /> {errors.name?.['message']}</Text>}
 
-                    {errors.email && <Text style={styles.errorMessage}><Feather style={styles.iconMessage} name='x-circle' /> {errors.email?.message}</Text>}
+                    {errors.email && <Text style={styles.errorMessage}><Feather style={styles.iconMessage} name='x-circle' /> {errors.email?.['message']}</Text>}
 
-                    {errors.password && <Text style={styles.errorMessage}><Feather style={styles.iconMessage} name='x-circle' /> {errors.password?.message}</Text>}
+                    {errors.password && <Text style={styles.errorMessage}><Feather style={styles.iconMessage} name='x-circle' /> {errors.password?.['message']}</Text>}
 
-                    {errors.password_repeat && <Text style={styles.errorMessage}><Feather style={styles.iconMessage} name='x-circle' /> {errors.password_repeat?.message}</Text>}
+                    {errors.password_repeat && <Text style={styles.errorMessage}><Feather style={styles.iconMessage} name='x-circle' /> {errors.password_repeat?.['message']}</Text>}
                 </View>
 
                 <TouchableOpacity onPress={handleSubmit(handleSignUp)}>
