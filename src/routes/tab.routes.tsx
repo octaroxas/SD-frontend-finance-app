@@ -12,8 +12,16 @@ export default function Tabs() {
         <Navigator
             screenOptions={{
                 headerShown: false,
+                tabBarInactiveTintColor: '#192043',
                 tabBarStyle: {
-                    backgroundColor: '#3B405A'
+                    height: 60,
+                    backgroundColor: '#3B405A',
+                },
+                tabBarActiveTintColor: 'white',
+                tabBarActiveBackgroundColor: '#647AFF',
+                tabBarLabelStyle: {
+                    marginBottom: 5,
+                    fontWeight: 'bold'
                 }
             }}
         >
