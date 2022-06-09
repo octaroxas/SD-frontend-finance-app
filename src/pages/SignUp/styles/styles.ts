@@ -79,7 +79,6 @@ const styles = StyleSheet.create({
     },
     iconPasswordInput: {
         backgroundColor: '#434965',
-
     },
     buttom: {
         display: "flex",
