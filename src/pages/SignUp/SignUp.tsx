@@ -14,6 +14,7 @@ import { useForm, Controller, FieldValues } from 'react-hook-form';
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 const HeaderSignUp = () => {
     return (
@@ -36,7 +37,7 @@ const schemaValidation = yup.object({
     password_repeat: yup.string().oneOf([yup.ref('password'), null], 'As senhas informadas precisam ser iguais!').required('Repita a senha informada!'),
 })
 
-const SignUp = () => {
+const SignUp = ({ navigation }: any) => {
 
     const EyeOpened = require('../../assets/opened-eye.png')
     const EyeClosed = require('../../assets/closed-eye.png')
@@ -85,6 +86,10 @@ const SignUp = () => {
         }
     }
 
+    const tologin = () => {
+        navigation.navigate('login')
+    }
+
     useEffect(() => {
 
     }, []);
@@ -92,7 +97,7 @@ const SignUp = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={tologin}>
                 <Feather
                     style={styles.backButtom}
                     name="chevron-left"
@@ -214,7 +219,7 @@ const SignUp = () => {
                 <Text style={styles.textRedirectLogin}>
                     Já possuo cadastro?
                 </Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={tologin}>
                     <Text style={styles.redirectLogin}>
                         Fazer login!
                     </Text>

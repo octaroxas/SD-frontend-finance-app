@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Login from './src/pages/Login/Login';
 import SignUp from './src/pages/SignUp/SignUp';
+import ApplicationRoutes from './src/routes/ApplicationRoutes';
 
 /*
 export default function App() {
@@ -23,7 +24,7 @@ export default function App() {
         networkActivityIndicatorVisible
         animated
       />
-      <SignUp />
+      <ApplicationRoutes />
     </>
 
   );

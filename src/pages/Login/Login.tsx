@@ -22,6 +22,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Feather from '@expo/vector-icons/Feather';
 import * as yup from 'yup'
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 
 const HeaderLogin = () => {
@@ -52,7 +53,7 @@ async function handleLogin(credentials: any) {
 }
 
 
-const Login = () => {
+const Login = ({ navigation }: any) => {
 
   const [fontsLoaded] = useFonts({
     Nunito_400Regular,
@@ -79,7 +80,9 @@ const Login = () => {
 
   }, [])
 
-
+  const toSignUp = () => {
+    navigation.navigate('signup')
+  }
 
   if (!fontsLoaded) {
     return (
@@ -163,7 +166,7 @@ const Login = () => {
           <Text style={styles.textRedirectSignUp}>
             Não possuo cadastro?
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={toSignUp}>
             <Text style={styles.redirectSignUp}>
               Criar conta!
             </Text>
