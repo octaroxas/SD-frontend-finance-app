@@ -50,8 +50,8 @@ const SignUp = () => {
         },
         resolver: yupResolver(schemaValidation)
     })
-    const [showPassword, setShowPassword] = useState(false)
-    const [showPasswordRepeat, setShowPasswordRepeat] = useState(false)
+    const [showPassword, setShowPassword] = useState(true)
+    const [showPasswordRepeat, setShowPasswordRepeat] = useState(true)
 
 
     const toggleShowPassword = () => {
@@ -68,25 +68,21 @@ const SignUp = () => {
         password_repeat: string
     }
 
-    const handleSignUp = async (form: FieldValues) => {
+    const handleSignUp = async (form: any) => {
         console.log(form)
 
-        const data = {
+        const credentialsForm = {
             name: form.name,
             email: form.email,
             password: form.password
         }
 
-        const headers = {
-
+        try {
+            const { data } = await axios.post('https://finance.ianbrito.com.br/api/v1/register', credentialsForm)
+            console.log(data)
+        } catch (error) {
+            console.log(error)
         }
-
-        axios.post('http://localhost:8080/api/v1/register', data).then(response => {
-            console.log(response.data)
-        }).catch(error => console.log(error))
-
-
-
     }
 
     useEffect(() => {

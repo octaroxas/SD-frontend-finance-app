@@ -23,7 +23,7 @@ export default function App() {
         networkActivityIndicatorVisible
         animated
       />
-      <Login />
+      <SignUp />
     </>
 
   );
