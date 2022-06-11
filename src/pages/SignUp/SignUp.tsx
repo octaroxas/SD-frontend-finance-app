@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import {
     Text,
     View,
@@ -15,7 +15,15 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../../contexts/AuthContext'
 
+
+interface IFormSignUp {
+    name: string;
+    email: string;
+    password: string;
+    password_repeat: string
+}
 const HeaderSignUp = () => {
     return (
         <View>
@@ -53,6 +61,7 @@ const SignUp = ({ navigation }: any) => {
     })
     const [showPassword, setShowPassword] = useState(true)
     const [showPasswordRepeat, setShowPasswordRepeat] = useState(true)
+    const { handleSignUp } = useContext(AuthContext)
 
 
     const toggleShowPassword = () => {
@@ -62,29 +71,23 @@ const SignUp = ({ navigation }: any) => {
         setShowPasswordRepeat(!showPasswordRepeat)
     }
 
-    interface IFormSignUp {
-        name: string;
-        email: string;
-        password: string;
-        password_repeat: string
-    }
 
-    const handleSignUp = async (form: any) => {
-        console.log(form)
+    // const handleSignUp = async (form: any) => {
+    //     console.log(form)
 
-        const credentialsForm = {
-            name: form.name,
-            email: form.email,
-            password: form.password
-        }
+    //     const credentialsForm = {
+    //         name: form.name,
+    //         email: form.email,
+    //         password: form.password
+    //     }
 
-        try {
-            const { data } = await axios.post('https://finance.ianbrito.com.br/api/v1/register', credentialsForm)
-            console.log(data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    //     try {
+    //         const { data } = await axios.post('https://finance.ianbrito.com.br/api/v1/register', credentialsForm)
+    //         console.log(data)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     const tologin = () => {
         navigation.navigate('login')
@@ -97,9 +100,11 @@ const SignUp = ({ navigation }: any) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <TouchableOpacity onPress={tologin}>
+            <TouchableOpacity
+                onPress={tologin}
+                style={styles.backButtom}
+            >
                 <Feather
-                    style={styles.backButtom}
                     name="chevron-left"
                     color="white"
                     size={30}

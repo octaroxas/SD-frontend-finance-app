@@ -10,6 +10,7 @@ const { Navigator, Screen } = createBottomTabNavigator()
 export default function Tabs() {
     return (
         <Navigator
+            initialRouteName="Dashboard"
             screenOptions={{
                 headerShown: false,
                 tabBarInactiveTintColor: '#192043',

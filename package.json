@@ -12,6 +12,7 @@
   "dependencies": {
     "@expo-google-fonts/nunito": "^0.2.2",
     "@hookform/resolvers": "^2.8.10",
+    "@react-native-async-storage/async-storage": "^1.17.6",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
@@ -23,6 +24,7 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-hook-form": "^7.31.2",
+    "react-lottie": "^1.2.3",
     "react-native": "0.64.3",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@types/react": "~17.0.21",
+    "@types/react-lottie": "^1.2.6",
     "@types/react-native": "~0.64.12",
     "typescript": "~4.3.5"
   },

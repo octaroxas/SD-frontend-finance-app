@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
         padding: 40,
         backgroundColor: '#32364D'
     },
+    backButtonContainer: {
+        backgroundColor: '#f1f1f1'
+    },
     backButtom: {
         padding: 3,
         display: "flex",

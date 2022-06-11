@@ -5,6 +5,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import Login from './src/pages/Login/Login';
 import SignUp from './src/pages/SignUp/SignUp';
 import ApplicationRoutes from './src/routes/ApplicationRoutes';
+import AuthProvider from './src/contexts/AuthContext';
+import { NavigationContainer } from '@react-navigation/native';
 
 /*
 export default function App() {
@@ -24,7 +26,12 @@ export default function App() {
         networkActivityIndicatorVisible
         animated
       />
-      <ApplicationRoutes />
+      <AuthProvider>
+        <NavigationContainer>
+          <ApplicationRoutes />
+        </NavigationContainer>
+      </AuthProvider >
+      {/* <ApplicationRoutes /> */}
     </>
 
   );
