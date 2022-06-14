@@ -76,8 +76,12 @@ function AuthProvider({ children }: any) {
 
             const { data } = await api.post('https://finance.ianbrito.com.br/api/v1/register', credentialsForm)
             console.log(data)
-            handleLogin({ name: form.name, email: form.email })
-            setLoading(false)
+
+            if (data) {
+                console.log(data)
+                //handleLogin({ email: form.email, password: form.password })
+                setLoading(false)
+            }
 
         } catch (error) {
             console.log(error)

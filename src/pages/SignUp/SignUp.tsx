@@ -89,6 +89,21 @@ const SignUp = ({ navigation }: any) => {
     //     }
     // }
 
+    const signUp = async (userRegistrationData: any) => {
+        try {
+            handleSignUp({
+                name: userRegistrationData.name,
+                email: userRegistrationData.email,
+                password: userRegistrationData.password
+            })
+
+            tologin()
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const tologin = () => {
         navigation.navigate('login')
     }
@@ -206,7 +221,7 @@ const SignUp = ({ navigation }: any) => {
                     {errors.password_repeat && <Text style={styles.errorMessage}><Feather style={styles.iconMessage} name='x-circle' /> {errors.password_repeat?.['message']}</Text>}
                 </View>
 
-                <TouchableOpacity onPress={handleSubmit(handleSignUp)}>
+                <TouchableOpacity onPress={handleSubmit(signUp)}>
                     <LinearGradient
                         colors={['#5971FF', '#8355E5']}
                         style={styles.buttom}
