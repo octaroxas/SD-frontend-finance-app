@@ -111,14 +111,24 @@ function AuthProvider({ children }: any) {
 
         async function getLocalData() {
             setLoading(true)
-            const user = await AsyncStorage.getItem('@Finance-app:user');
-            const token = await AsyncStorage.getItem('@Finance-app:token');
 
-            if (user && token) {
-                setUser(JSON.parse(user))
-                setAuthenticated(true)
-                setLoading(false)
+            try {
+                const user = await AsyncStorage.getItem('@Finance-app:user');
+                const token = await AsyncStorage.getItem('@Finance-app:token');
+
+                console.log(user, token)
+                if (user && token) {
+                    setUser(JSON.parse(user))
+                    setAuthenticated(true)
+                    setLoading(false)
+                } else {
+                    setAuthenticated(false)
+                    setLoading(false)
+                }
+            } catch (error) {
+                console.log(error)
             }
+
         }
 
         getLocalData()
