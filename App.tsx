@@ -7,18 +7,20 @@ import SignUp from './src/pages/SignUp/SignUp';
 import ApplicationRoutes from './src/routes/ApplicationRoutes';
 import AuthProvider from './src/contexts/AuthContext';
 import { NavigationContainer } from '@react-navigation/native';
-
-/*
-export default function App() {
-  return (
-    <Login />
-  );
-}
-*/
-
-// Comente o bloco de código abaixo e descomente o acima para alternar para a tela de Login.
+import * as Font from 'expo-font';
 
 export default function App() {
+  const [loaded] = Font.useFonts({
+    Nunito_400: require('./src/assets/fonts/nunito_400.ttf'),
+    Nunito_700: require('./src/assets/fonts/nunito_700.ttf'),
+    Roboto_400: require('./src/assets/fonts/roboto_400.ttf'),
+    Roboto_700: require('./src/assets/fonts/roboto_700.ttf'),
+  });
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
     <>
       <StatusBar
