@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import { NavigationContainer } from '@react-navigation/native'
 import AuthStack from "./authStack.routes";
 import Tabs from "./tab.routes";
+import AppStack from "./app.stack.routes";
 
 import { AuthContext } from "../contexts/AuthContext";
 import { ActivityIndicator, View, Text } from "react-native";
@@ -14,7 +15,7 @@ export default function ApplicationRoutes() {
         return <Loading />
     }
 
-    return authenticated ? <Tabs /> : <AuthStack />
+    return authenticated ? <AppStack /> : <AuthStack />
     // return <Loading />
 
 }

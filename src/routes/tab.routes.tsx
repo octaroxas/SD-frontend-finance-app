@@ -4,6 +4,8 @@ import Profile from "../pages/Profile/Profile";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import CreateWallet from "../pages/CreateWallet/CreateWallet";
 import Statistics from "../pages/Statistics/Statistics";
+import TransactionDetails from "../pages/TransactionDetails/TransactionDetails";
+import AppStack from "./app.stack.routes";
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
