@@ -13,6 +13,9 @@ export declare global {
             },
             edit_transaction: {
                 id: string
+            },
+            show_wallet: {
+                id: string
             }
         }
     }

@@ -27,14 +27,17 @@ export default function Dashboard() {
                     <WalletCard
                         name='Carteira local'
                         balance={200}
+                        id='1'
                     />
                     <WalletCard
-                        name='Carteira local'
+                        name='Nubank'
                         balance={200}
+                        id='2'
                     />
                     <WalletCard
-                        name='Carteira local'
+                        name='Inter'
                         balance={200}
+                        id='3'
                     />
                 </ScrollView>
             </View>

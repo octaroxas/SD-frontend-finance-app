@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: "space-between",
         alignItems: 'center',
-        backgroundColor: '#393E56'
+        //backgroundColor: '#393E56'
     },
     iconDescriptionContainer: {
         display: "flex",

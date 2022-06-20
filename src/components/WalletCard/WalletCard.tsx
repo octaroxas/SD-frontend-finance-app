@@ -1,6 +1,7 @@
 import React from "react";
 import {
     Text,
+    TouchableOpacity,
     View
 } from "react-native";
 import {
@@ -8,11 +9,23 @@ import {
 } from "../../@interfaces/IWalletCard";
 import { Svg, Path } from 'react-native-svg'
 import { styles } from './styles'
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-const WalletCard = ({ name, balance }: IWalletCard) => {
+interface IRouteTransacrionDetailsProps {
+    id: string
+}
+
+
+const WalletCard = ({ name, balance, id }: IWalletCard) => {
+
+    const { navigate } = useNavigation()
+
+    const toWallet = () => {
+        navigate('show_wallet', { id: id })
+    }
 
     return (
-        <View style={styles.card}>
+        <TouchableOpacity style={styles.card} onPress={toWallet}>
             <Svg
                 style={styles.walletIcon}
                 width={40}
@@ -28,7 +41,7 @@ const WalletCard = ({ name, balance }: IWalletCard) => {
                 <Text style={styles.walletName}>{name}</Text>
                 <Text style={styles.walletBalance} >R$ {balance}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

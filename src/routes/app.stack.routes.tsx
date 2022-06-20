@@ -4,6 +4,7 @@ import TransactionDetails from "../pages/TransactionDetails/TransactionDetails";
 import Tabs from "./tab.routes";
 import EditProfile from "../pages/EditProfile/EditProfile";
 import { EditTransaction } from "../pages/EditTransaction/EditTransaction";
+import ShowWallet from "../pages/ShowWallet/ShowWallet";
 
 const { Screen, Navigator } = createNativeStackNavigator()
 
@@ -45,6 +46,13 @@ export default function AppStack() {
             }}
                 name="edit_transaction"
                 component={EditTransaction}
+            />
+
+            <Screen options={{
+                headerTitle: 'Carteira',
+            }}
+                name="show_wallet"
+                component={ShowWallet}
             />
 
         </Navigator>
