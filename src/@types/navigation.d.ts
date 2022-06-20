@@ -7,7 +7,13 @@ export declare global {
             transaction_details: {
                 id: string
             };
-            main: undefined
+            main: undefined,
+            edit_profile: {
+                id: string
+            },
+            edit_transaction: {
+                id: string
+            }
         }
     }
 }
