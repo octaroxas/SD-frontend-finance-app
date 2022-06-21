@@ -1,54 +1,46 @@
-import React, {
-    createContext,
-    useEffect,
-    useState
-} from "react";
-import { Text, View, ActivityIndicator } from "react-native";
-import api from "../api/api";
+import React, { createContext, useEffect, useState } from 'react'
+import { Text, View, ActivityIndicator } from 'react-native'
+import api from '../api/api'
 import Lottie from 'react-lottie'
 import LottieLoading from '../assets/lotties/lottie-finance.json'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-
 interface User {
-    id: number;
-    email: string;
-    emailVerifiedAt: string;
-    updatedAt: string;
-    createdAt: string;
+    id: number
+    email: string
+    emailVerifiedAt: string
+    updatedAt: string
+    createdAt: string
     //name: string;
 }
 
 interface IAuthContext {
-    authenticated: boolean;
-    loading: boolean;
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    authenticated: boolean
+    loading: boolean
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
     user: User
-    handleSignUp: (form: any) => Promise<void>;
-    handleLogin: ({ credentials }: any) => Promise<void>;
-    handleLogout?: () => void;
-    setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+    handleSignUp: (form: any) => Promise<void>
+    handleLogin: ({ credentials }: any) => Promise<void>
+    handleLogout?: () => void
+    setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const Loading = (message: string) => {
-
     const options = {
         loop: true,
         autoplay: true,
         animationData: LottieLoading,
         rendererSettings: {
-            preserveAspectRatio: "xMidYMid slice"
+            preserveAspectRatio: 'xMidYMid slice'
         }
     }
     return (
-        <View
-        >
+        <View>
             {/* <Lottie
                 options={options}
                 height={200}
                 width={200}
             /> */}
-
         </View>
     )
 }
@@ -56,7 +48,6 @@ export const Loading = (message: string) => {
 export const AuthContext = createContext({} as IAuthContext)
 
 function AuthProvider({ children }: any) {
-
     const [authenticated, setAuthenticated] = useState(false)
     const [user, setUser] = useState({} as User)
     const [loading, setLoading] = useState(false)
@@ -73,8 +64,10 @@ function AuthProvider({ children }: any) {
         }
 
         try {
-
-            const { data } = await api.post('https://finance.ianbrito.com.br/api/v1/register', credentialsForm)
+            const { data } = await api.post(
+                'https://finance.ianbrito.com.br/api/v1/register',
+                credentialsForm
+            )
             console.log(data)
 
             if (data) {
@@ -82,7 +75,6 @@ function AuthProvider({ children }: any) {
                 //handleLogin({ email: form.email, password: form.password })
                 setLoading(false)
             }
-
         } catch (error) {
             console.log(error)
         }
@@ -92,9 +84,18 @@ function AuthProvider({ children }: any) {
         setLoading(true)
 
         try {
-            const { data } = await api.post('https://finance.ianbrito.com.br/api/v1/login', credentials)
+            const { data } = await api.post(
+                'https://finance.ianbrito.com.br/api/v1/login',
+                credentials
+            )
             console.log(credentials)
-            await AsyncStorage.setItem('@Finance-app:user', JSON.stringify(data.user))
+            api.defaults.headers.common[
+                'Authorization'
+            ] = `Bearer ${data.token}`
+            await AsyncStorage.setItem(
+                '@Finance-app:user',
+                JSON.stringify(data.user)
+            )
             await AsyncStorage.setItem('@Finance-app:token', data.token)
             setAuthenticated(true)
             setLoading(false)
@@ -112,13 +113,12 @@ function AuthProvider({ children }: any) {
     }
 
     useEffect(() => {
-
         async function getLocalData() {
             setLoading(true)
 
             try {
-                const user = await AsyncStorage.getItem('@Finance-app:user');
-                const token = await AsyncStorage.getItem('@Finance-app:token');
+                const user = await AsyncStorage.getItem('@Finance-app:user')
+                const token = await AsyncStorage.getItem('@Finance-app:token')
 
                 console.log(user, token)
                 if (user && token) {
@@ -132,11 +132,9 @@ function AuthProvider({ children }: any) {
             } catch (error) {
                 console.log(error)
             }
-
         }
 
         getLocalData()
-
     }, [])
 
     return (
@@ -149,7 +147,7 @@ function AuthProvider({ children }: any) {
                 handleSignUp,
                 handleLogin,
                 handleLogout,
-                setAuthenticated,
+                setAuthenticated
             }}
         >
             {children}
@@ -157,4 +155,4 @@ function AuthProvider({ children }: any) {
     )
 }
 
-export default AuthProvider;
+export default AuthProvider
