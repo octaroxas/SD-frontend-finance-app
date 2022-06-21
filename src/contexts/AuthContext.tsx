@@ -95,7 +95,7 @@ function AuthProvider({ children }: any) {
             const { data } = await api.post('https://finance.ianbrito.com.br/api/v1/login', credentials)
             console.log(credentials)
             await AsyncStorage.setItem('@Finance-app:user', JSON.stringify(data.user))
-            await AsyncStorage.setItem('@Finance-app:token', JSON.stringify(data.token))
+            await AsyncStorage.setItem('@Finance-app:token', data.token)
             setAuthenticated(true)
             setLoading(false)
             console.log('Autentiado?', authenticated)
