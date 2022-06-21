@@ -9,6 +9,14 @@ import Lottie from 'react-lottie'
 import LottieLoading from '../assets/lotties/lottie-finance.json'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
+interface Account {
+    id: number,
+    name: string,
+    avatar: string,
+    user_id: number,
+    created_at: string,
+    updated_at: string
+}
 
 interface User {
     id: number;
@@ -16,7 +24,7 @@ interface User {
     emailVerifiedAt: string;
     updatedAt: string;
     createdAt: string;
-    //name: string;
+    account: Account
 }
 
 interface IAuthContext {
@@ -93,22 +101,25 @@ function AuthProvider({ children }: any) {
 
         try {
             const { data } = await api.post('https://finance.ianbrito.com.br/api/v1/login', credentials)
-            console.log(credentials)
+            console.log('Formulario de login: ', credentials)
+            api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
             await AsyncStorage.setItem('@Finance-app:user', JSON.stringify(data.user))
             await AsyncStorage.setItem('@Finance-app:token', data.token)
             setAuthenticated(true)
             setLoading(false)
-            console.log('Autentiado?', authenticated)
         } catch (error) {
-            console.log(error)
+            console.log('Erro login: ', error)
         }
+        console.log('Autentiado: ', authenticated)
     }
 
-    const handleLogout = () => {
-        console.log('logout')
+    const handleLogout = async () => {
+        //api.defaults.headers.common['Authorization'] = `Bearer` + `${AsyncStorage.getItem('@Finance-app:token')}`
+        //await api.post('/logout')
         AsyncStorage.removeItem('@Finance-app:user')
         AsyncStorage.removeItem('@Finance-app:token')
         setAuthenticated(false)
+        console.log('logout')
     }
 
     useEffect(() => {
@@ -120,7 +131,7 @@ function AuthProvider({ children }: any) {
                 const user = await AsyncStorage.getItem('@Finance-app:user');
                 const token = await AsyncStorage.getItem('@Finance-app:token');
 
-                console.log(user, token)
+                console.log('Dados useEffect', JSON.parse(user), token)
                 if (user && token) {
                     setUser(JSON.parse(user))
                     setAuthenticated(true)

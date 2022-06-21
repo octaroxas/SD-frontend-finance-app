@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IGeneralBalance } from "../../@interfaces/IGeneralBalance";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { ITitle } from '../../@interfaces/ITitle'
 import { Image, Text, View } from "react-native";
 import styles from './styles'
+import { AuthContext } from "../../contexts/AuthContext";
 
 const DashboardHeader = () => {
 
     const ProfileImage = require('../../assets/profile/profile.png')
+    const { user: { account: { name } } } = useContext(AuthContext)
 
-    const Title = ({ name }: ITitle) => {
+    const Title = () => {
         return (
             <View>
                 <Text style={styles.titleSaudation}>Olá, Bem vindo!</Text>
@@ -36,7 +38,7 @@ const DashboardHeader = () => {
             start={{ x: 0.7, y: 0 }}
         >
             <View style={styles.containerTitleAndProfile}>
-                <Title name='Octacílio C.' />
+                <Title />
                 <Image
                     style={styles.profileImage}
                     source={ProfileImage}

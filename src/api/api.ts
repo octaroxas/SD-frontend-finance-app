@@ -5,7 +5,7 @@ const api = axios.create({
         "Accept": "application/json",
         "Content-Type": "application/json",
     },
-    baseURL: 'https://finance.ianbrito.com.br/api/v1/'
+    baseURL: 'https://finance.ianbrito.com.br/api/v1'
 })
 
 export default api;

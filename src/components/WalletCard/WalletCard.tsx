@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Text,
     TouchableOpacity,
@@ -10,6 +10,7 @@ import {
 import { Svg, Path } from 'react-native-svg'
 import { styles } from './styles'
 import { useNavigation, useRoute } from "@react-navigation/native";
+import api from "../../api/api";
 
 interface IRouteTransacrionDetailsProps {
     id: string
@@ -19,6 +20,18 @@ interface IRouteTransacrionDetailsProps {
 const WalletCard = ({ name, balance, id }: IWalletCard) => {
 
     const { navigate } = useNavigation()
+
+    const [walletBalance, setWalletBalance] = useState(0)
+
+    const getWallet = async () => {
+        api.defaults.headers.common['Authorization'] = `Bearer 5|1YIVMgDth7RPGKjG42LlDeKpDrVwpGQAvF9DxSIO`
+        const { data } = await api.get('/wallet')
+
+        const wallet = data.map((wallet) => wallet.id === id)
+        const { transactions } = wallet
+
+        //setWallet(data)
+    }
 
     const toWallet = () => {
         navigate('show_wallet', { id: id })

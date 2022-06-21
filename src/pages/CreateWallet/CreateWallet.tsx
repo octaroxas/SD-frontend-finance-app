@@ -23,13 +23,11 @@ export default function CreateWallet() {
         if (name) {
             setLoading(true)
             const token = await AsyncStorage.getItem('@Finance-app:token')
-            const headers = {
-                "Authorization": `Bearer ${token}`
-            }
+
             //api.defaults.headers.common['Authorization'] = `Bearer ${token}`
             console.log(token)
             try {
-                const { data } = await api.post('/wallet', { name: name }, headers)
+                const { data } = await api.post('/wallet', { name: name })
                 console.log(data)
 
             } catch (error) {
