@@ -94,11 +94,11 @@ function AuthProvider({ children }: any) {
         try {
             const { data } = await api.post('https://finance.ianbrito.com.br/api/v1/login', credentials)
             console.log(credentials)
-            AsyncStorage.setItem('@Finance-app:user', JSON.stringify(data.user))
-            AsyncStorage.setItem('@Finance-app:token', JSON.stringify(data.token))
+            await AsyncStorage.setItem('@Finance-app:user', JSON.stringify(data.user))
+            await AsyncStorage.setItem('@Finance-app:token', JSON.stringify(data.token))
             setAuthenticated(true)
             setLoading(false)
-            console.log(authenticated)
+            console.log('Autentiado?', authenticated)
         } catch (error) {
             console.log(error)
         }
