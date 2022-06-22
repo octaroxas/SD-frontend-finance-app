@@ -67,16 +67,16 @@ const ShowWallet = () => {
         }
         navigate('main')
     }
-    useEffect(() => {
-        const getWallet = async () => {
-            const { data } = await api.get('/transaction')
-            const wallet = data.filter((wallet) => wallet.id === id)
-            console.log('Carteira e transacoes: ', wallet)
-            const { transactions } = wallet as IlistTransactions
-            //setGeneralBalance(amountSum)
+    const getWallet = async () => {
+        const { data } = await api.get('/transaction')
+        const wallet = data.filter((wallet) => wallet.id === id)
+        console.log('Carteira e transacoes: ', wallet)
+        const { transactions } = wallet as IlistTransactions
+        //setGeneralBalance(amountSum)
 
-            setListTransactions(transactions)
-        }
+        setListTransactions(transactions)
+    }
+    useEffect(() => {
         getWallet()
     }, [])
 

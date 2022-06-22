@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
     container: {
         display: 'flex',
         marginHorizontal: 40,
+        marginBottom: 70
     },
     label: {
         fontSize: 15,

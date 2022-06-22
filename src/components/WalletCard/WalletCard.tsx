@@ -42,7 +42,7 @@ const WalletCard = ({ name, id, key }: IWalletCard) => {
     const { navigate } = useNavigation()
 
     const [walletBalance, setWalletBalance] = useState(0)
-    const [generalBalance, setGeneralBalance] = useState()
+    const [generalBalance, setGeneralBalance] = useState(0)
 
     const getWallet = async () => {
         const { data } = await api.get('/transaction')
@@ -56,7 +56,7 @@ const WalletCard = ({ name, id, key }: IWalletCard) => {
             amountSum = amountSum + parseFloat(tran.amount.toFixed(2))
         })
 
-        setGeneralBalance(amountSum)
+        //setGeneralBalance(amountSum)
 
         //setWallet(data)
     }

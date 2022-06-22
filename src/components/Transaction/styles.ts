@@ -39,11 +39,13 @@ const styles = StyleSheet.create({
     transactionAmountRevenue: {
         alignSelf: "center",
         color: '#2FBCA3',
+        // color: 'white'
 
     },
     transactionAmountExpense: {
         alignSelf: "center",
         color: '#FF7A7A',
+        // color: 'red'
 
     },
     arrowIcon: {

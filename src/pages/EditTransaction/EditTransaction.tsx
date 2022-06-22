@@ -1,8 +1,19 @@
+import { useRoute } from '@react-navigation/native'
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
+
+interface IPropsRoute {
+    id: string | number
+}
 
 export const EditTransaction = () => {
+
+    const route = useRoute()
+    const { id } = route.params as IPropsRoute
     return (
-        <Text>Editar transaction</Text>
+        <View>
+            <Text>Editar transaction</Text>
+            <Text>Id: {id}</Text>
+        </View>
     )
 }

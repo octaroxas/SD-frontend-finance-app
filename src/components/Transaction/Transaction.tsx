@@ -12,7 +12,7 @@ interface ITransactionProps {
     type?: string,
     amount: number,
     description: string,
-    nameWallet: string
+    nameWallet?: string
 }
 const Transaction = (data: ITransactionProps) => {
 
@@ -57,9 +57,10 @@ const Transaction = (data: ITransactionProps) => {
 
             <View style={styles.balanceChevronContainer}>
 
-                {transaction.type === 'revenue' ?
-                    <Text style={styles.transactionAmountRevenue}>R$ {transaction.amount}</Text>
-                    : <Text style={styles.transactionAmountExpense}>R$ {transaction.amount}</Text>}
+                {transaction.type === 'income' ? <Text style={styles.transactionAmountRevenue}>R$ {transaction.amount}</Text> : <Text style={styles.transactionAmountExpense}>R$ {transaction.amount}</Text>
+                }
+
+
                 <Feather
                     color='#4B5068'
                     size={20}

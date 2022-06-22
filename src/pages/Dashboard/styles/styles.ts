@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //padding: 40,
+        //height: Dimensions.get('screen').height,
         display: "flex",
         backgroundColor: '#32364D'
     }

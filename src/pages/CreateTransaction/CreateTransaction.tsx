@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Picker } from '@react-native-community/picker'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styles from './styles'
@@ -6,6 +6,7 @@ import api from '../../api/api'
 import RNPickerSelect from "@react-native-community/picker";
 import { Button, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import DatePicker from 'react-native-date-picker'
+import { AuthContext } from '../../contexts/AuthContext'
 
 type wallet = {
     id: number;
@@ -25,6 +26,7 @@ interface ICreateTransaction {
 
 const CreateTransaction = () => {
 
+    const { setLoading } = useContext(AuthContext)
     const [walets, setWallets] = useState<wallet[]>()
     const [typeTransactions, setTypeTransactions] = useState()
     const [categories, setCategories] = useState()
@@ -53,16 +55,37 @@ const CreateTransaction = () => {
     }, [])
 
     //const [selectedValue, setSelectedValue] = useState("java");
-    const [wallet, setWallet] = useState();
-    const [typeTran, setTypeTran] = useState();
-    const [categ, setCateg] = useState()
+    const [wallet, setWallet] = useState() as any;
+    const [typeTran, setTypeTran] = useState() as any;
+    const [categ, setCateg] = useState() as any
+    const [desc, setDesc] = useState('')
+    const [price, setPrice] = useState(0)
+    const [dat, setDat] = useState(new Date()) as any
+
+
+    const getPrice = (valor: any) => {
+        setPrice(valor)
+    }
 
 
     const createTransaction = async () => {
-        const transaction = {
 
+        const transaction = {
+            type: typeTran,
+            description: desc,
+            amount: price,
+            date: "2022-06-01",
+            done: true,
+            category_id: categ,
+            wallet_id: wallet
         }
-        const { data } = await api.post('/transaction')
+
+        console.log('transaction object', transaction)
+        setLoading(true)
+        const { data } = await api.post('/transaction', transaction)
+        console.log(data)
+        setLoading(false)
+
     }
 
     return (
@@ -77,9 +100,9 @@ const CreateTransaction = () => {
                         style={{ height: 50, width: 150, color: '#fff', backgroundColor: '#434965' }}
                         onValueChange={(itemValue, itemIndex) => setWallet(itemValue)}
                     >
-                        <Picker.Item label="Conta principal" value="1" />
-                        <Picker.Item label="Nubank" value="2" />
-                        <Picker.Item label="Inter" value="3" />
+                        <Picker.Item label="Conta principal" value={1} />
+                        <Picker.Item label="Nubank" value={2} />
+                        <Picker.Item label="Inter" value={3} />
                     </Picker>
                 </View>
 
@@ -103,19 +126,18 @@ const CreateTransaction = () => {
                     style={{ height: 50, width: '100%', color: '#fff', backgroundColor: '#434965' }}
                     onValueChange={(itemValue, itemIndex) => setCateg(itemValue)}
                 >
-                    <Picker.Item label="Saúde" value="Saúde" />
-                    <Picker.Item label="Casa" value="Casa" />
-                    <Picker.Item label="Alimentação" value="Alimentação" />
-                    <Picker.Item label="Outros" value="Outros" />
+                    <Picker.Item label="Saúde" value={1} />
+                    <Picker.Item label="Casa" value={2} />
+                    <Picker.Item label="Alimentação" value={3} />
+                    <Picker.Item label="Outros" value={4} />
                 </Picker>
             </View>
 
             <Text style={styles.label}>Descrição</Text>
-            <TextInput style={styles.input} placeholder='Informe a descrição' />
+            <TextInput style={styles.input} placeholder='Informe a descrição' onChangeText={setDesc} />
             <Text style={styles.label}>Valor</Text>
-            <TextInput style={styles.input} placeholder='Informe o valor da transação' />
+            <TextInput style={styles.input} placeholder='Informe o valor da transação' keyboardType="numeric" onChangeText={getPrice} />
 
-            <Text style={styles.label}>Data</Text>
 
             <TouchableOpacity style={styles.button} onPress={createTransaction}>
                 <Text style={styles.buttonText}>

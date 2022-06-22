@@ -5,7 +5,7 @@ export declare global {
             signup: undefined;
             dashboard: undefined;
             transaction_details: {
-                id: string | number
+                id: string | number | undefined
             };
             main: undefined,
             edit_profile: {
