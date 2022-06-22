@@ -34,7 +34,7 @@ interface IAuthContext {
     user: User
     handleSignUp: (form: any) => Promise<void>;
     handleLogin: ({ credentials }: any) => Promise<void>;
-    handleLogout?: () => void;
+    handleLogout?: () => Promise<void>;
     setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -102,6 +102,7 @@ function AuthProvider({ children }: any) {
         try {
             const { data } = await api.post('https://finance.ianbrito.com.br/api/v1/login', credentials)
             console.log('Formulario de login: ', credentials)
+            console.log('login data.token: ', data.token)
             api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
             await AsyncStorage.setItem('@Finance-app:user', JSON.stringify(data.user))
             await AsyncStorage.setItem('@Finance-app:token', data.token)
@@ -115,7 +116,7 @@ function AuthProvider({ children }: any) {
 
     const handleLogout = async () => {
         //api.defaults.headers.common['Authorization'] = `Bearer` + `${AsyncStorage.getItem('@Finance-app:token')}`
-        //await api.post('/logout')
+        await api.post('/logout')
         AsyncStorage.removeItem('@Finance-app:user')
         AsyncStorage.removeItem('@Finance-app:token')
         setAuthenticated(false)
@@ -131,7 +132,10 @@ function AuthProvider({ children }: any) {
                 const user = await AsyncStorage.getItem('@Finance-app:user');
                 const token = await AsyncStorage.getItem('@Finance-app:token');
 
-                console.log('Dados useEffect', JSON.parse(user), token)
+                api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+
+                console.log('Dados useEffect', token)
                 if (user && token) {
                     setUser(JSON.parse(user))
                     setAuthenticated(true)

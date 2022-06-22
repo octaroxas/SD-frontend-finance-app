@@ -1,5 +1,5 @@
 import { View, Text, TextInput, TouchableOpacity, TouchableNativeFeedbackBase } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './styles'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useForm, Controller, FieldValues } from 'react-hook-form';
@@ -38,6 +38,10 @@ export default function CreateWallet() {
             navigate('main')
         }
     }
+
+    useEffect(() => {
+
+    }, [])
 
     return (
         <View style={styles.container}>

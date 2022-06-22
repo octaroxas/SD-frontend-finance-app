@@ -15,7 +15,8 @@ export declare global {
                 id: string
             },
             show_wallet: {
-                id: string | number
+                id: string | number;
+                name: string;
             }
         }
     }

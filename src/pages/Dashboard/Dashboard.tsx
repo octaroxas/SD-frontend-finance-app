@@ -53,7 +53,7 @@ export default function Dashboard() {
     useEffect(() => {
         const getWallet = async () => {
             const token = await AsyncStorage.getItem('@Finance-app:token')
-            console.log('Token get Wallet: ', token)
+            console.log('Token get Wallet dashboard: ', token)
             //api.defaults.headers.common['Authorization'] = `Bearer 19|9V8Xei5NNpz2234t5SEk85mWsHzIgxsAcKL5vVBL`
 
             try {
@@ -68,38 +68,29 @@ export default function Dashboard() {
     }, [])
 
     return (
-        <SafeAreaView style={styles.container}>
-            <DashboardHeader />
-            <View style={{ marginBottom: 20 }}>
-                <ScrollView
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{ marginLeft: 40, marginRight: 40, paddingRight: 60, marginTop: 180 }}
-                >
-                    {!wallet && <NotWallets />}
-                    {wallet?.map(wallet => (
-                        <WalletCard
-                            id={wallet.id}
-                            name={wallet.name}
-                        //balance={200}
-                        />
-                    ))}
-                    {/* <WalletCard
-                        name='Nubank'
-                        balance={200}
-                        id='2'
-                    />
-                    <WalletCard
-                        name='Inter'
-                        balance={200}
-                        id='3'
-                    /> */}
-                </ScrollView>
-            </View>
-            <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <SafeAreaView style={styles.container}>
+                <DashboardHeader />
+                <View style={{ marginBottom: 20 }}>
+                    <ScrollView
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={{ marginLeft: 40, marginRight: 40, paddingRight: 60, marginTop: 180 }}
+                    >
+                        {!wallet && <NotWallets />}
+                        {wallet?.map(wallet => (
+                            <WalletCard
+                                id={wallet.id}
+                                name={wallet.name}
+                            //balance={200}
+                            />
+                        ))}
+
+                    </ScrollView>
+                </View>
                 <RecentMovimentations />
                 <ResumeMovimentarions />
-            </ScrollView>
-        </SafeAreaView>
+            </SafeAreaView>
+        </ScrollView>
     )
 }

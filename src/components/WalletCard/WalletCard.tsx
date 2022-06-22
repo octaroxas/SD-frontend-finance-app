@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Text,
     TouchableOpacity,
@@ -16,26 +16,58 @@ interface IRouteTransacrionDetailsProps {
     id: string
 }
 
+interface IlistTransactions {
+    id: number,
+    name: string,
+    transactions: Array<ITransactionList>,
+}
 
-const WalletCard = ({ name, balance, id }: IWalletCard) => {
+interface ITransactionList {
+    id: number,
+    type: {
+        type: string,
+        display: string
+    },
+    description: string,
+    amount: number,
+    date: string,
+    done: boolean,
+    category: {
+        id: number,
+        name: string
+    }
+}
+const WalletCard = ({ name, id, key }: IWalletCard) => {
 
     const { navigate } = useNavigation()
 
     const [walletBalance, setWalletBalance] = useState(0)
+    const [generalBalance, setGeneralBalance] = useState(0)
 
     const getWallet = async () => {
-        api.defaults.headers.common['Authorization'] = `Bearer 5|1YIVMgDth7RPGKjG42LlDeKpDrVwpGQAvF9DxSIO`
-        const { data } = await api.get('/wallet')
+        const { data } = await api.get('/transaction')
 
-        const wallet = data.map((wallet) => wallet.id === id)
-        const { transactions } = wallet
+        const wallet = data.filter((wallet) => wallet.id === id)
+        console.log('-------------------------------------------')
+        console.log(wallet)
+        const { transactions } = wallet as IlistTransactions
+        let amountSum = 0
+        transactions?.map((tran) => {
+            amountSum = amountSum + tran.amount
+        })
+
+        setGeneralBalance(amountSum)
 
         //setWallet(data)
     }
 
     const toWallet = () => {
-        navigate('show_wallet', { id: id })
+        navigate('show_wallet', { id: id, name: name })
     }
+
+    useEffect(() => {
+        getWallet()
+    }, [])
 
     return (
         <TouchableOpacity style={styles.card} onPress={toWallet}>
@@ -52,7 +84,7 @@ const WalletCard = ({ name, balance, id }: IWalletCard) => {
             </Svg>
             <View>
                 <Text style={styles.walletName}>{name}</Text>
-                <Text style={styles.walletBalance} >R$ {balance}</Text>
+                <Text style={styles.walletBalance} >R$ {generalBalance}</Text>
             </View>
         </TouchableOpacity>
     )

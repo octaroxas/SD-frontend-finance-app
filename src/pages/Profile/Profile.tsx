@@ -8,6 +8,7 @@ import api from '../../api/api'
 import { AuthContext } from '../../contexts/AuthContext'
 import styles from './styles/styles'
 import { Feather } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
 
 interface IUser {
     name: string
@@ -15,11 +16,13 @@ interface IUser {
 }
 
 export default function Profile({ navigation }: any) {
+    const { goBack, navigate } = useNavigation()
     const { handleLogout } = useContext(AuthContext)
-    const [user, setUser] = useState({} as IUser)
+    //const [user, setUser] = useState({} as IUser)
+    const { user: { id, account: { name }, email } } = useContext(AuthContext)
 
     const backPage = () => {
-        navigation.navigate.goBack()
+        goBack()
     }
 
     const toEditProfile = () => {
@@ -27,14 +30,14 @@ export default function Profile({ navigation }: any) {
     }
 
     useEffect(() => {
-        const getProfile = async () => {
-            const { data } = await api.get('/profile')
-            setUser({
-                name: data.name,
-                email: data.email
-            })
-        }
-        getProfile()
+        // const getProfile = async () => {
+        //     const { data } = await api.get('/profile')
+        //     setUser({
+        //         name: data.name,
+        //         email: data.email
+        //     })
+        // }
+        // getProfile()
     }, [])
     return (
         <SafeAreaView style={styles.container}>
@@ -52,10 +55,10 @@ export default function Profile({ navigation }: any) {
                     source={require('../../assets/profile_pic.png')}
                     style={styles.profilePic}
                 />
-                {user.name ? (
-                    <Text style={styles.profileName}>{user.name}</Text>
+                {name ? (
+                    <Text style={styles.profileName}>{name}</Text>
                 ) : (
-                    <Text style={styles.profileName}>Octacílio C.</Text>
+                    <Text style={styles.profileName}>{name}</Text>
                 )}
             </View>
             <View>
@@ -69,8 +72,8 @@ export default function Profile({ navigation }: any) {
                         color="#2F344B"
                         style={styles.infoIcon}
                     />
-                    {user.name ? (
-                        <Text style={styles.infoText}>{user.name}</Text>
+                    {name ? (
+                        <Text style={styles.infoText}>{name}</Text>
                     ) : (
                         <Text style={styles.infoText}>
                             Octacílio Carvalho de Almeida
@@ -84,8 +87,8 @@ export default function Profile({ navigation }: any) {
                         color="#2F344B"
                         style={styles.infoIcon}
                     />
-                    {user.email ? (
-                        <Text style={styles.infoText}>{user.email}</Text>
+                    {email ? (
+                        <Text style={styles.infoText}>{email}</Text>
                     ) : (
                         <Text style={styles.infoText}>user@gmail.com</Text>
                     )}

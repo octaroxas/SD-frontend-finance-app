@@ -38,13 +38,13 @@ export default function Tabs() {
                 },
             }}
         >
-            <Screen
+            {/* <Screen
                 options={{
                     tabBarIcon: () => (<Feather name="bar-chart-2" size={20} color='white' />),
                     headerShown: true
                 }}
                 name="Estatísticas" component={Statistics}
-            />
+            /> */}
             <Screen
                 options={{
                     tabBarIcon: () => (<Ionicons name="wallet" color='white' size={20} />)
