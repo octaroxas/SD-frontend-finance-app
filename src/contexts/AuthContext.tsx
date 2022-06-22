@@ -21,6 +21,7 @@ interface Account {
 interface User {
     id: number;
     email: string;
+    avatar: string,
     emailVerifiedAt: string;
     updatedAt: string;
     createdAt: string;
@@ -117,8 +118,9 @@ function AuthProvider({ children }: any) {
     const handleLogout = async () => {
         //api.defaults.headers.common['Authorization'] = `Bearer` + `${AsyncStorage.getItem('@Finance-app:token')}`
         await api.post('/logout')
-        AsyncStorage.removeItem('@Finance-app:user')
-        AsyncStorage.removeItem('@Finance-app:token')
+        AsyncStorage.clear()
+        //AsyncStorage.removeItem('@Finance-app:user')
+        //AsyncStorage.removeItem('@Finance-app:token')
         setAuthenticated(false)
         console.log('logout')
     }

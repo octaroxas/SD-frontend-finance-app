@@ -32,16 +32,18 @@ interface ITransactionList {
 }
 
 
-
 const DashboardHeader = () => {
 
+    const getAvatarUrl = async () => {
+        const { data } = await api.get(`/account/${id}`)
+        setAvatar(data.avatar)
+    }
     const ProfileImage = require('../../assets/profile/profile.png')
-    const { user: { account: { name } } } = useContext(AuthContext)
+    const { user: { account: { name, id } } } = useContext(AuthContext)
     const [walletTransactions, setWalletTransactions] = useState<IlistTransactions[]>([])
     const [generalBalance, setGeneralBalance] = useState<number>(0)
-
-
-
+    const [avatarURL, setAvatarURL] = useState()
+    const [avatar, setAvatar] = useState('')
 
     const Title = () => {
         return (
@@ -90,19 +92,19 @@ const DashboardHeader = () => {
         setGeneralBalance(0)
         setGeneralBalance(total)
     }
-    useEffect(() => {
-        const getWallet = async () => {
-            try {
-                const { data } = await api.get('/transaction')
-                setWalletTransactions(data)
+    const getWallet = async () => {
+        try {
+            const { data } = await api.get('/transaction')
+            setWalletTransactions(data)
 
-            } catch (error) {
-                console.log(error)
-            }
+        } catch (error) {
+            console.log(error)
         }
+    }
+    useEffect(() => {
         getWallet()
         sumBalances()
-
+        getAvatarUrl()
     }, [])
 
     return (
@@ -116,7 +118,7 @@ const DashboardHeader = () => {
                 <Title />
                 <Image
                     style={styles.profileImage}
-                    source={ProfileImage}
+                    source={{ uri: avatar }}
                 />
             </View>
             <GeneralBalance
