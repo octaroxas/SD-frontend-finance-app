@@ -95,7 +95,7 @@ export default function Dashboard() {
                             showsHorizontalScrollIndicator={false}
                             keyExtractor={({ name }) => name}
                             data={wallets}
-                            renderItem={({ index, item: { id, name } }) => <WalletCard id={id} name={name} />}
+                            renderItem={({ index, item: { id, name } }) => <WalletCard id={Number(id)} name={name} />}
                         />
                     }
                 </View>

@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { AuthContext } from '../../contexts/AuthContext'
 
 interface IShowWalletProps {
-    id: string;
+    id: string | number;
     nameWallet: string
 }
 

@@ -49,6 +49,7 @@ const RecentMovimentations = () => {
 
                 {recents?.map(({ id, amount, description, category, date, type: { type, display } }) => (
                     <Transaction
+                        key={id}
                         description={description}
                         id={id}
                         amount={amount}
@@ -56,27 +57,6 @@ const RecentMovimentations = () => {
                     />
                 ))}
 
-
-                {/* <FlatList
-                    data={recents}
-                    keyExtractor={({ id }) => String(id)}
-                    renderItem={({ item: { id, amount, description, type }, index }) => <Transaction description={description} id={id} amount={amount} type={type.display} />}
-                /> */}
-                {/* <Transaction
-                    id="1"
-                // amount={12}
-                // type='Receita'
-                // walletId='1'
-                />
-
-                <Transaction
-                    id="1"
-                    amount={12}
-                    type='Receita'
-                    walletId='1'
-                />
-
-                 */}
             </View>
         </View>
     )

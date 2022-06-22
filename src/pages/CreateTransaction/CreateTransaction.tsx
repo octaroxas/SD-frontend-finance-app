@@ -100,9 +100,9 @@ const CreateTransaction = () => {
                         style={{ height: 50, width: 150, color: '#fff', backgroundColor: '#434965' }}
                         onValueChange={(itemValue, itemIndex) => setWallet(itemValue)}
                     >
-                        <Picker.Item label="Conta principal" value={1} />
-                        <Picker.Item label="Nubank" value={2} />
-                        <Picker.Item label="Inter" value={3} />
+                        <Picker.Item label="Conta Padrão" value={1} />
+                        <Picker.Item label="Banco Pan" value={3} />
+                        <Picker.Item label="Nubank" value={19} />
                     </Picker>
                 </View>
 

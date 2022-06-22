@@ -1,6 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native'
 import React, { useContext, useEffect, useState } from 'react'
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import api from '../../api/api'
 import ShowWalletCard from '../../components/ShowWalletCard/ShowWalletCard'
@@ -9,7 +9,7 @@ import { AuthContext } from '../../contexts/AuthContext'
 import styles from './styles'
 
 interface IShowWalletProps {
-    id: string;
+    id: number;
     name: string
 }
 
@@ -45,17 +45,11 @@ const ShowWallet = () => {
 
     const route = useRoute()
     const { id, name } = route.params as IShowWalletProps
-    const [listTransactions, setListTransactions] = useState<ITransactionList[]>()
-
-    // const getTransactions = async () => {
-    //     const { data } = await api.get(`/transaction/${id}`)
-    // }
+    const [allTransactions, setAllTransactions] = useState<IlistTransactions[]>([])
+    const [wallet, setWallet] = useState<IlistTransactions>()
+    const [selectedTransactions, setSelectedTransactions] = useState<ITransactionList[]>([])
 
     const { navigate } = useNavigation()
-
-    const [walletBalance, setWalletBalance] = useState(0)
-    const [generalBalance, setGeneralBalance] = useState()
-
 
     const deleteWallet = async () => {
         setLoading(true)
@@ -68,16 +62,23 @@ const ShowWallet = () => {
         navigate('main')
     }
     const getWallet = async () => {
-        const { data } = await api.get('/transaction')
-        const wallet = data.filter((wallet) => wallet.id === id)
-        console.log('Carteira e transacoes: ', wallet)
-        const { transactions } = wallet as IlistTransactions
-        //setGeneralBalance(amountSum)
 
-        setListTransactions(transactions)
+        const { data } = await api.get('/transaction')
+
+        setWallet(data.filter((wallet) => wallet.id === Number(id)))
+
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].id === Number(id)) {
+                setSelectedTransactions(data[i].transactions)
+            }
+        }
+
+        //setSelectedTransactions(data[0].transactions)
     }
     useEffect(() => {
+        // setLoading(true)
         getWallet()
+        // setLoading(false)
     }, [])
 
     return (
@@ -100,44 +101,29 @@ const ShowWallet = () => {
                     Movimentações
                 </Text>
             </View>
+
             <ScrollView
                 style={styles.movimentationsHistory}
                 showsVerticalScrollIndicator={false}
             >
-                {console.log('listTrans: ', listTransactions)}
-                {listTransactions?.map(({ id, amount, description, type, category, date }) => (
+                {/* <Transaction
+                    id={22}
+                    description='Spokas Grill'
+                    amount={20}
+                    type='income'
+                    nameWallet='Carteira Padrão'
+                /> */}
+                {selectedTransactions.length <= 0 && <ActivityIndicator size={100} />}
+                {selectedTransactions && selectedTransactions.map(({ id, amount, description, category, date, type: { type, display } }) => (
                     <Transaction
-                        id={id}
-                        nameWallet={name}
-                        amount={amount}
-                        description={description}
                         key={id}
+                        description={description}
+                        id={id}
+                        amount={amount}
+                        type={type}
                     />
                 ))}
-
-                {/* <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction />
-                <Transaction /> */}
-
             </ScrollView>
-
-
-
         </SafeAreaView>
     )
 }

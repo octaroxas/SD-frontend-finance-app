@@ -1,5 +1,5 @@
 export interface IWalletCard {
-    id: number | string
+    id: number
     name: string;
     balance?: number;
     key?: any

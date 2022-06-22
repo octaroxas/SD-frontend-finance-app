@@ -10,13 +10,15 @@ const styles = StyleSheet.create({
     },
     label: {
         color: '#fff',
-        fontWeight: 'bold',
-        marginBottom: 10
+        fontWeight: '700',
+        marginBottom: 10,
+        fontFamily: 'Nunito_700'
     },
     input: {
         backgroundColor: '#434965',
         padding: 15,
-        borderRadius: 15
+        borderRadius: 15,
+        color: '#fff'
     },
     button: {
         display: "flex",

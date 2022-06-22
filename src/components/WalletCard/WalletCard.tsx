@@ -48,8 +48,8 @@ const WalletCard = ({ name, id, key }: IWalletCard) => {
         const { data } = await api.get('/transaction')
 
         const wallet = data.filter((wallet) => wallet.id === id)
-        console.log('-------------------------------------------')
-        console.log('Carteira e transacoes: ', wallet)
+        // console.log('-------------------------------------------')
+        // console.log('Carteira e transacoes: ', wallet)
         const { transactions } = wallet as IlistTransactions
         let amountSum = 0
         transactions?.map((tran) => {
