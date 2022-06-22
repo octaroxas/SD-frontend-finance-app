@@ -13,6 +13,11 @@ type wallet = {
     name: string;
 }
 
+type categories = {
+    id: number;
+    name: string;
+}
+
 interface ICreateTransaction {
     account: number;
     type: string,
@@ -27,22 +32,25 @@ interface ICreateTransaction {
 const CreateTransaction = () => {
 
     const { setLoading } = useContext(AuthContext)
-    const [walets, setWallets] = useState<wallet[]>()
+    const [walets, setWalets] = useState<wallet[]>()
     const [typeTransactions, setTypeTransactions] = useState()
-    const [categories, setCategories] = useState()
+    const [categories, setCategories] = useState<categories[]>()
 
     const [date, setDate] = useState(new Date())
 
     const getWallets = async () => {
         const { data } = await api.get('/wallet')
-        setWallets(data)
+        setWalets(data)
+        console.log(walets)
     }
+
+    const getCategories = async () => {
+        const { data } = await api.get('/category')
+        setCategories(data)
+    }
+
     const getTypeTran = async () => {
         //const { data } = await api.get('/wallet')
-        //setWallets(data)
-    }
-    const getCategories = async () => {
-        //const { data } = await api.get('/categories')
         //setWallets(data)
     }
 
@@ -51,7 +59,8 @@ const CreateTransaction = () => {
 
 
     useEffect(() => {
-
+        getWallets()
+        getCategories()
     }, [])
 
     //const [selectedValue, setSelectedValue] = useState("java");
@@ -66,7 +75,6 @@ const CreateTransaction = () => {
     const getPrice = (valor: any) => {
         setPrice(valor)
     }
-
 
     const createTransaction = async () => {
 
@@ -100,9 +108,9 @@ const CreateTransaction = () => {
                         style={{ height: 50, width: 150, color: '#fff', backgroundColor: '#434965' }}
                         onValueChange={(itemValue, itemIndex) => setWallet(itemValue)}
                     >
-                        <Picker.Item label="Conta Padrão" value={1} />
-                        <Picker.Item label="Banco Pan" value={3} />
-                        <Picker.Item label="Nubank" value={19} />
+                        {walets && walets.map(({ id, name }) => (
+                            <Picker.Item key={id} label={name} value={id} />
+                        ))}
                     </Picker>
                 </View>
 
@@ -126,10 +134,13 @@ const CreateTransaction = () => {
                     style={{ height: 50, width: '100%', color: '#fff', backgroundColor: '#434965' }}
                     onValueChange={(itemValue, itemIndex) => setCateg(itemValue)}
                 >
-                    <Picker.Item label="Saúde" value={1} />
+                    {categories && categories.map(({ id, name }) => (
+                        <Picker.Item key={id} label={name} value={id} />
+                    ))}
+                    {/* <Picker.Item label="Saúde" value={1} />
                     <Picker.Item label="Casa" value={2} />
                     <Picker.Item label="Alimentação" value={3} />
-                    <Picker.Item label="Outros" value={4} />
+                    <Picker.Item label="Outros" value={4} /> */}
                 </Picker>
             </View>
 
