@@ -76,16 +76,10 @@ const DashboardHeader = () => {
     // }
 
     const sumBalances = () => {
-        //console.log(walletTransactions)
         console.log('------------------------------------------------------------------------')
-        //setGeneralBalance(0)
         let total = generalBalance
         for (let i = 0; i < walletTransactions.length; i++) {
             for (let j = 0; j < walletTransactions[i].transactions.length; j++) {
-                //console.log('amount: ', walletTransactions[i].transactions[j].amount)
-
-                // total = total + walletTransactions[i].transactions[j].amount;
-                // console.log(total)
 
                 if (walletTransactions[i].transactions[j].type.type === "income") {
                     total = total + walletTransactions[i].transactions[j].amount;
@@ -95,13 +89,6 @@ const DashboardHeader = () => {
         }
         setGeneralBalance(0)
         setGeneralBalance(total)
-        // walletTransactions?.map(({ transactions }) => {
-        //     if (transactions?.length > 0) {
-        //         transactions.map((i) => {
-        //             setGeneralBalance(generalBalance + i.amount)
-        //         })
-        //     }
-        // })
     }
     useEffect(() => {
         const getWallet = async () => {
@@ -141,3 +128,10 @@ const DashboardHeader = () => {
 }
 
 export default DashboardHeader
+// walletTransactions?.map(({ transactions }) => {
+//     if (transactions?.length > 0) {
+//         transactions.map((i) => {
+//             setGeneralBalance(generalBalance + i.amount)
+//         })
+//     }
+// })

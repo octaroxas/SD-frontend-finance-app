@@ -6,25 +6,32 @@ import { Ionicons, Feather } from '@expo/vector-icons'
 import api from "../../api/api";
 import { useNavigation } from "@react-navigation/native";
 
-
-const Transaction = ({ id }: any) => {
+interface ITransactionProps {
+    id?: number | string,
+    walletId?: number | string,
+    type?: string,
+    amount: number,
+    description: string,
+    nameWallet: string
+}
+const Transaction = (data: ITransactionProps) => {
 
     const { navigate } = useNavigation()
 
-    const [transaction, setTransaction] = useState({} as ITransaction)
+    const [transaction, setTransaction] = useState(data)
 
     const getTransaction = async () => {
 
         // const { data } = await api.get(`/transaction/${id}`)
-        const data = {
-            id: '1',
-            walletId: '1',
-            type: 'revenue',
-            amount: 120,
-            description: 'gasolina',
-            walletName: 'Nubank'
-        }
-        setTransaction(data)
+        // const data = {
+        //     id: '1',
+        //     walletId: '1',
+        //     type: 'revenue',
+        //     amount: 120,
+        //     description: 'gasolina',
+        //     walletName: 'Nubank'
+        // }
+        // setTransaction(data)
     }
 
     useEffect(() => {
@@ -43,7 +50,7 @@ const Transaction = ({ id }: any) => {
 
                 <View style={styles.transactionDescription}>
                     <Text style={styles.transactionName}>{transaction.description}</Text>
-                    <Text style={styles.walletName}>Nubank</Text>
+                    <Text style={styles.walletName}>{transaction.nameWallet}</Text>
                 </View>
             </View>
 

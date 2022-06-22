@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native'
 import React, { useContext, useEffect, useState } from 'react'
-import { Text, TouchableOpacity, View, ScrollView, StyleSheet } from 'react-native'
+import { Text, TouchableOpacity, View, ScrollView, StyleSheet, FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import api from '../../api/api'
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader'
@@ -44,7 +44,7 @@ export default function Dashboard() {
         )
     }
 
-    const [wallet, setWallet] = useState<Wallet[]>()
+    const [wallets, setWallet] = useState<Wallet[]>()
     const { handleLogout, setAuthenticated } = useContext(AuthContext)
 
     const { navigate } = useNavigation()
@@ -52,8 +52,8 @@ export default function Dashboard() {
 
     useEffect(() => {
         const getWallet = async () => {
-            const token = await AsyncStorage.getItem('@Finance-app:token')
-            console.log('Token get Wallet dashboard: ', token)
+            //const token = await AsyncStorage.getItem('@Finance-app:token')
+            //console.log('Token get Wallet dashboard: ', token)
             //api.defaults.headers.common['Authorization'] = `Bearer 19|9V8Xei5NNpz2234t5SEk85mWsHzIgxsAcKL5vVBL`
 
             try {
@@ -67,26 +67,37 @@ export default function Dashboard() {
         getWallet()
     }, [])
 
+    // <ScrollView
+    //                     horizontal={true}
+    //                     showsHorizontalScrollIndicator={false}
+    //                     contentContainerStyle={{ marginLeft: 40, marginRight: 40, paddingRight: 60, marginTop: 180 }}
+    //                 >
+    //                     {/* {wallet?.map(wallet => (
+    //                         <WalletCard
+    //                         id={wallet.id}
+    //                         name={wallet.name}
+    //                         //balance={200}
+    //                         />
+    //                     ))} */}
+
+    //                 </ScrollView>
+
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <SafeAreaView style={styles.container}>
                 <DashboardHeader />
-                <View style={{ marginBottom: 20 }}>
-                    <ScrollView
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                        contentContainerStyle={{ marginLeft: 40, marginRight: 40, paddingRight: 60, marginTop: 180 }}
-                    >
-                        {!wallet && <NotWallets />}
-                        {wallet?.map(wallet => (
-                            <WalletCard
-                                id={wallet.id}
-                                name={wallet.name}
-                            //balance={200}
-                            />
-                        ))}
+                <View style={{ marginTop: 180, paddingLeft: 10 }}>
+                    {!wallets && <NotWallets />}
 
-                    </ScrollView>
+                    {
+                        wallets && <FlatList
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            keyExtractor={({ name }) => name}
+                            data={wallets}
+                            renderItem={({ index, item: { id, name } }) => <WalletCard id={id} name={name} />}
+                        />
+                    }
                 </View>
                 <RecentMovimentations />
                 <ResumeMovimentarions />

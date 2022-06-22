@@ -42,18 +42,18 @@ const WalletCard = ({ name, id, key }: IWalletCard) => {
     const { navigate } = useNavigation()
 
     const [walletBalance, setWalletBalance] = useState(0)
-    const [generalBalance, setGeneralBalance] = useState(0)
+    const [generalBalance, setGeneralBalance] = useState()
 
     const getWallet = async () => {
         const { data } = await api.get('/transaction')
 
         const wallet = data.filter((wallet) => wallet.id === id)
         console.log('-------------------------------------------')
-        console.log(wallet)
+        console.log('Carteira e transacoes: ', wallet)
         const { transactions } = wallet as IlistTransactions
         let amountSum = 0
         transactions?.map((tran) => {
-            amountSum = amountSum + tran.amount
+            amountSum = amountSum + parseFloat(tran.amount.toFixed(2))
         })
 
         setGeneralBalance(amountSum)
