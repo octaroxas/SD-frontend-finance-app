@@ -45,16 +45,13 @@ export default function Dashboard() {
     }
 
     const [wallets, setWallet] = useState<Wallet[]>()
-    const { handleLogout, setAuthenticated } = useContext(AuthContext)
+    const { handleLogout, setAuthenticated, setLoading } = useContext(AuthContext)
 
     const { navigate } = useNavigation()
 
 
     useEffect(() => {
         const getWallet = async () => {
-            //const token = await AsyncStorage.getItem('@Finance-app:token')
-            //console.log('Token get Wallet dashboard: ', token)
-            //api.defaults.headers.common['Authorization'] = `Bearer 19|9V8Xei5NNpz2234t5SEk85mWsHzIgxsAcKL5vVBL`
 
             try {
                 const { data } = await api.get('/wallet')
@@ -66,21 +63,6 @@ export default function Dashboard() {
         }
         getWallet()
     }, [])
-
-    // <ScrollView
-    //                     horizontal={true}
-    //                     showsHorizontalScrollIndicator={false}
-    //                     contentContainerStyle={{ marginLeft: 40, marginRight: 40, paddingRight: 60, marginTop: 180 }}
-    //                 >
-    //                     {/* {wallet?.map(wallet => (
-    //                         <WalletCard
-    //                         id={wallet.id}
-    //                         name={wallet.name}
-    //                         //balance={200}
-    //                         />
-    //                     ))} */}
-
-    //                 </ScrollView>
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>

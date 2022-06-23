@@ -47,18 +47,21 @@ const WalletCard = ({ name, id, key }: IWalletCard) => {
     const getWallet = async () => {
         const { data } = await api.get('/transaction')
 
-        const wallet = data.filter((wallet) => wallet.id === id)
-        // console.log('-------------------------------------------')
-        // console.log('Carteira e transacoes: ', wallet)
-        const { transactions } = wallet as IlistTransactions
-        let amountSum = 0
-        transactions?.map((tran) => {
-            amountSum = amountSum + parseFloat(tran.amount.toFixed(2))
-        })
+        // const wallet = data.filter((wallet) => wallet.id === id)
 
-        //setGeneralBalance(amountSum)
+        let total = 0
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].id === Number(id)) {
+                for (let j = 0; j < data[i].transactions.length; j++) {
 
-        //setWallet(data)
+                    if (data[i].transactions[j].type.type === "income") {
+                        total = total + data[i].transactions[j].amount;
+                        console.log(total)
+                    }
+                }
+            }
+        }
+        setGeneralBalance(total)
     }
 
     const toWallet = () => {

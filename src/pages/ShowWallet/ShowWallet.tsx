@@ -57,7 +57,7 @@ const ShowWallet = () => {
             await api.delete(`/wallet/${id}`)
             setLoading(false)
         } catch (error) {
-
+            console.log(error)
         }
         navigate('main')
     }

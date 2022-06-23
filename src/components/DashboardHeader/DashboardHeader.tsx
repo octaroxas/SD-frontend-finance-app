@@ -41,9 +41,11 @@ const DashboardHeader = () => {
     const ProfileImage = require('../../assets/profile/profile.png')
     const { user: { account: { name, id } } } = useContext(AuthContext)
     const [walletTransactions, setWalletTransactions] = useState<IlistTransactions[]>([])
-    const [generalBalance, setGeneralBalance] = useState<number>(0)
+    const [generalBalance, setGeneralBalance] = useState<number>()
     const [avatarURL, setAvatarURL] = useState()
     const [avatar, setAvatar] = useState('')
+    const { handleLogout, setAuthenticated, setLoading } = useContext(AuthContext)
+
 
     const Title = () => {
         return (
@@ -64,47 +66,47 @@ const DashboardHeader = () => {
             </View>
         )
     }
+    // const sumBalances = () => {
 
+    //     let total = 0
+    //     for (let i = 0; i < walletTransactions.length; i++) {
+    //         for (let j = 0; j < walletTransactions[i].transactions.length; j++) {
 
-    // const getWallet = async () => {
-    //     try {
-    //         const { data } = await api.get('/transaction')
-    //         setWalletTransactions(data)
-
-    //     } catch (error) {
-    //         console.log(error)
+    //             if (walletTransactions[i].transactions[j].type.type === "income") {
+    //                 total = total + walletTransactions[i].transactions[j].amount;
+    //                 console.log(total)
+    //             }
+    //         }
     //     }
-
+    //     setGeneralBalance(0)
+    //     setGeneralBalance(total)
     // }
+    const getWallet = async () => {
 
-    const sumBalances = () => {
-        console.log('------------------------------------------------------------------------')
-        let total = generalBalance
-        for (let i = 0; i < walletTransactions.length; i++) {
-            for (let j = 0; j < walletTransactions[i].transactions.length; j++) {
+        const { data } = await api.get('/transaction')
+        setWalletTransactions(data)
 
-                if (walletTransactions[i].transactions[j].type.type === "income") {
-                    total = total + walletTransactions[i].transactions[j].amount;
+        let total = 0
+        for (let i = 0; i < data.length; i++) {
+            for (let j = 0; j < data[i].transactions.length; j++) {
+
+                if (data[i].transactions[j].type.type === "income") {
+                    total = total + data[i].transactions[j].amount;
                     console.log(total)
                 }
             }
         }
-        setGeneralBalance(0)
+        //setGeneralBalance(0)
+        console.log('total: ', total)
         setGeneralBalance(total)
-    }
-    const getWallet = async () => {
-        try {
-            const { data } = await api.get('/transaction')
-            setWalletTransactions(data)
 
-        } catch (error) {
-            console.log(error)
-        }
     }
     useEffect(() => {
+        // setLoading(true)
         getWallet()
-        sumBalances()
+        //sumBalances()
         getAvatarUrl()
+        // setLoading(false)
     }, [])
 
     return (
@@ -122,7 +124,7 @@ const DashboardHeader = () => {
                 />
             </View>
             <GeneralBalance
-            //balance={generalBalance}
+                balance={generalBalance}
             />
 
         </LinearGradient>
@@ -130,10 +132,3 @@ const DashboardHeader = () => {
 }
 
 export default DashboardHeader
-// walletTransactions?.map(({ transactions }) => {
-//     if (transactions?.length > 0) {
-//         transactions.map((i) => {
-//             setGeneralBalance(generalBalance + i.amount)
-//         })
-//     }
-// })
