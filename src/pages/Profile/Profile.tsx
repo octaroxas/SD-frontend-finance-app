@@ -19,7 +19,9 @@ export default function Profile({ navigation }: any) {
     const { goBack, navigate } = useNavigation()
     const { handleLogout } = useContext(AuthContext)
     //const [user, setUser] = useState({} as IUser)
-    const { user: { id, account: { name }, email } } = useContext(AuthContext)
+    const [avatar, setAvatar] = useState('')
+
+    const { user: { account: { name, id }, email } } = useContext(AuthContext)
 
     const backPage = () => {
         goBack()
@@ -29,7 +31,13 @@ export default function Profile({ navigation }: any) {
         navigation.navigate('EditProfile')
     }
 
+    const getAvatarUrl = async () => {
+        const { data } = await api.get(`/account/${id}`)
+        setAvatar(data.avatar)
+    }
+
     useEffect(() => {
+        getAvatarUrl()
         // const getProfile = async () => {
         //     const { data } = await api.get('/profile')
         //     setUser({
@@ -52,7 +60,8 @@ export default function Profile({ navigation }: any) {
 
             <View style={styles.profileHeader}>
                 <Image
-                    source={require('../../assets/profile_pic.png')}
+                    source={{ uri: avatar }}
+                    //source={require('../../assets/profile_pic.png')}
                     style={styles.profilePic}
                 />
                 {name ? (
