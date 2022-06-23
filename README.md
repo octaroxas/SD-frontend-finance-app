@@ -17,10 +17,35 @@
 > Nesta entrega, foram priorizadas a criação das primeiras telas conforme o projeto disponível no Figma, podendo ser acessado <a href="https://www.figma.com/file/YTsOFf1ZLPYqk3Z0HmocaN/Finance-App?node-id=0%3A1">nesta URL.</a> As integrações entre o back-end e o front-end serão efetivadas nas próximas entregas.
 
 ### 2. Segunda entrega - Junho 08, 2022
-- Em breve.
+- Criação de telas
+  - Implementação Tela de Login (Lucas D.)
+    - Criação de componentes (inputs, botões)
+    - Estilização de componentes
+  - Correções Tela de Login (Octacílio)
+    - Ajuste na estilização da tela
+    - Validação de email e senha
+    - Correção de componentes com bibliotecas para a criação de gradientes
+    - Ajuste na requisição HTTP para o login com o cliente HTTP Axios
+  - Correções Tela de Cadastro (Octacílio C.)
+    - Ajuste na requisição HTTP Axios para realizar o cadastro
+    - Ajuste input de senha
+    - navegação Stack
+  - Backend (Ian B.)
+    - Ajustes no CRUD das transações
 
 ### 3. Terceira entrega - Junho 22, 2022
-- Em breve.
+- (Octacílio C.) 
+  - Autenticação e controle de acesso a telas
+  - Dashboard
+  - Carteiras (Wallets)
+  - Tela de nova transação
+(Lucas D.)
+  - Tela de perfil
+  - Tela de nova transação
+(Ian B.)
+  - CRUD Account 
+  - CRUD Category
+
 
 ---
 

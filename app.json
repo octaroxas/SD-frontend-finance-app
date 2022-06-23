@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "finance-app",
+    "name": "Finance App",
     "slug": "finance-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "io.expo.finance"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
